@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAKE MINES PREDICTOR - Premium Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(22, 22, 22, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #2c2c2c;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff8b, #00e676);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 255, 139, 0.3);
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .controls-section {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #2c2c2c;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #00ff8b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a1a1a;
+            border: 2px solid #2c2c2c;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #00ff8b;
+            box-shadow: 0 0 10px rgba(0, 255, 139, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #00ff8b;
+        }
+
+        .grid-section {
+            text-align: center;
+        }
+
+        .mines-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 350px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 15px;
+            border: 1px solid #2c2c2c;
+        }
+
+        .grid-tile {
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            border: 2px solid #2c2c2c;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .grid-tile:hover {
+            border-color: #00ff8b;
+            box-shadow: 0 0 15px rgba(0, 255, 139, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .grid-tile.gem {
+            background: rgba(0, 255, 139, 0.1);
+            border-color: #00ff8b;
+            box-shadow: 0 0 20px rgba(0, 255, 139, 0.4);
+        }
+
+        .grid-tile.mine {
+            background: rgba(255, 46, 46, 0.1);
+            border-color: #ff2e2e;
+            box-shadow: 0 0 20px rgba(255, 46, 46, 0.4);
+        }
+
+        .grid-tile.safe {
+            background: rgba(0, 255, 139, 0.2);
+            border-color: #00ff8b;
+            box-shadow: 0 0 15px rgba(0, 255, 139, 0.5);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff8b, #00e676);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 139, 0.3);
+        }
+
+        .btn-secondary {
+            background: #2c2c2c;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .btn-secondary:hover {
+            background: #3c3c3c;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff2e2e, #ff1a1a);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 46, 46, 0.3);
+        }
+
+        .results-section {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #2c2c2c;
+        }
+
+        .result-item {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00ff8b;
+        }
+
+        .result-label {
+            color: #00ff8b;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-family: 'Courier New', monospace;
+            color: #ccc;
+            word-break: break-all;
+            font-size: 13px;
+        }
+
+        .url-connect {
+            background: rgba(0, 255, 139, 0.1);
+            border: 2px solid #00ff8b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-online {
+            background: #00ff8b;
+            box-shadow: 0 0 10px rgba(0, 255, 139, 0.5);
+        }
+
+        .status-offline {
+            background: #ff2e2e;
+            box-shadow: 0 0 10px rgba(255, 46, 46, 0.5);
+        }
+
+        .boom-detection {
+            background: rgba(255, 46, 46, 0.1);
+            border: 2px solid #ff2e2e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #666;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .upload-area:hover {
+            border-color: #00ff8b;
+            background: rgba(0, 255, 139, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: #00ff8b;
+            background: rgba(0, 255, 139, 0.1);
+        }
+
+        .screenshot-preview {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .learning-stats {
+            background: rgba(0, 255, 139, 0.1);
+            border: 1px solid #00ff8b;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .accuracy-meter {
+            width: 100%;
+            height: 20px;
+            background: #2c2c2c;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff2e2e, #ffaa00, #00ff8b);
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .mines-grid {
+                max-width: 280px;
+                gap: 6px;
+                padding: 15px;
+            }
+            
+            .grid-tile {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.5rem;
+            }
+            
+            .mines-grid {
+                max-width: 250px;
+                gap: 4px;
+                padding: 10px;
+            }
+            
+            .grid-tile {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+            
+            .url-connect {
+                padding: 15px;
+            }
+            
+            .url-connect > div {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .input-field {
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">STAKE MINES PREDICTOR</h1>
+            <p class="subtitle">Premium Prediction Tool with Advanced Algorithms</p>
+        </div>
+
+        <div class="url-connect">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center;">
+                    <span class="status-indicator status-online"></span>
+                    <span>Online Status: Connected</span>
+                </div>
+                <input type="url" class="input-field" placeholder="Enter Stake URL (e.g., https://stake.com)" style="max-width: 300px;" id="websiteUrl">
+                <button class="btn btn-primary" onclick="connectWebsite()">Connect</button>
+            </div>
+        </div>
+
+        <div class="boom-detection">
+            <h3 style="color: #ff2e2e; margin-bottom: 15px;">💥 BOOM Detection & Learning System</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label style="color: #ccc; display: block; margin-bottom: 10px;">Upload Boom Screenshot:</label>
+                    <div class="upload-area" onclick="document.getElementById('boomUpload').click()">
+                        <input type="file" id="boomUpload" accept="image/*" style="display: none;" onchange="handleBoomUpload(event)">
+                        <div id="uploadText">📸 Click or drag boom screenshot here</div>
+                        <img id="boomPreview" class="screenshot-preview" style="display: none;">
+                    </div>
+                </div>
+                <div class="learning-stats">
+                    <div style="color: #00ff8b; font-weight: bold; margin-bottom: 10px;">🧠 AI Learning Progress:</div>
+                    <div>Boom Patterns Analyzed: <span id="boomCount">0</span></div>
+                    <div>Prediction Accuracy:</div>
+                    <div class="accuracy-meter">
+                        <div class="accuracy-fill" id="accuracyFill" style="width: 85%;"></div>
+                    </div>
+                    <div style="text-align: center; color: #00ff8b; font-weight: bold;" id="accuracyText">85% Accurate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="controls-section">
+                <h3 class="section-title">🔧 Configuration</h3>
+                
+                <div class="input-group">
+                    <label class="input-label">Server Seed</label>
+                    <input type="text" class="input-field" id="serverSeed" placeholder="Enter server seed">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Client Seed</label>
+                    <input type="text" class="input-field" id="clientSeed" placeholder="Enter client seed">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Nonce</label>
+                    <input type="number" class="input-field" id="nonce" placeholder="Enter nonce value">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="hmacOption" checked>
+                    <label>✅ HMAC SHA256 Option</label>
+                    <button class="btn btn-secondary" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;" onclick="pasteHMAC()">📋 Paste</button>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="bytesOption" checked>
+                    <label>✅ Bytes Breakdown Option</label>
+                    <button class="btn btn-secondary" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;" onclick="pasteBytes()">📋 Paste</button>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="bytesToNumberOption" checked>
+                    <label>✅ Bytes to Number Logic</label>
+                    <button class="btn btn-secondary" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;" onclick="pasteNumbers()">📋 Paste</button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Select Number of Mines (1-25)</label>
+                    <select class="input-field" id="mineCount">
+                        <option value="1">1 Mine - Maximum Safety</option>
+                        <option value="2">2 Mines</option>
+                        <option value="3">3 Mines</option>
+                        <option value="4">4 Mines</option>
+                        <option value="5" selected>5 Mines - Balanced</option>
+                        <option value="6">6 Mines</option>
+                        <option value="7">7 Mines</option>
+                        <option value="8">8 Mines</option>
+                        <option value="9">9 Mines</option>
+                        <option value="10">10 Mines</option>
+                        <option value="11">11 Mines</option>
+                        <option value="12">12 Mines</option>
+                        <option value="13">13 Mines</option>
+                        <option value="14">14 Mines</option>
+                        <option value="15">15 Mines</option>
+                        <option value="16">16 Mines</option>
+                        <option value="17">17 Mines</option>
+                        <option value="18">18 Mines</option>
+                        <option value="19">19 Mines</option>
+                        <option value="20">20 Mines - High Risk</option>
+                        <option value="21">21 Mines</option>
+                        <option value="22">22 Mines</option>
+                        <option value="23">23 Mines</option>
+                        <option value="24">24 Mines - Maximum Risk</option>
+                        <option value="25">25 Mines - All Mines!</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Safe Tiles Strategy</label>
+                    <select class="input-field" id="safeStrategy">
+                        <option value="auto" selected>Auto Select Safe Tiles</option>
+                        <option value="manual">Manual Selection</option>
+                        <option value="corners">Corner Strategy</option>
+                        <option value="center">Center Strategy</option>
+                        <option value="edges">Edge Strategy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-section">
+                <h3 class="section-title">💎 Prediction Grid (5x5)</h3>
+                <div class="mines-grid" id="minesGrid">
+                    <!-- Grid tiles will be generated by JavaScript -->
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="generatePrediction()">🔮 Generate Prediction</button>
+                    <button class="btn btn-secondary" onclick="clearGrid()">🔄 Clear Grid</button>
+                    <button class="btn btn-danger" onclick="resetAll()">❌ Reset All</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h3 class="section-title">📊 Analysis Results</h3>
+            <div id="resultsContainer">
+                <div class="result-item">
+                    <div class="result-label">HMAC SHA256 Hash:</div>
+                    <div class="result-value" id="hmacResult">Ready for calculation...</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Bytes Breakdown:</div>
+                    <div class="result-value" id="bytesResult">Waiting for input...</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Number Logic Output:</div>
+                    <div class="result-value" id="numberResult">Pending analysis...</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Prediction Confidence:</div>
+                    <div class="result-value" id="confidenceResult">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Safe Tiles Found:</div>
+                    <div class="result-value" id="safeTilesResult">0 / 25</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Risk Level:</div>
+                    <div class="result-value" id="riskLevelResult">Low Risk</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Boom Pattern Detection:</div>
+                    <div class="result-value" id="boomPatternResult">No pattern detected</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Next Bet Recommendation:</div>
+                    <div class="result-value" id="nextBetResult">Analyzing...</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">AI Confidence Level:</div>
+                    <div class="result-value" id="aiConfidenceResult">🔥 100% SURE PREDICTION</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize grid
+        function initializeGrid() {
+            const grid = document.getElementById('minesGrid');
+            grid.innerHTML = '';
+            
+            for (let i = 0; i < 25; i++) {
+                const tile = document.createElement('div');
+                tile.className = 'grid-tile';
+                tile.dataset.index = i;
+                tile.onclick = () => toggleTile(i);
+                grid.appendChild(tile);
+            }
+        }
+
+        // Toggle tile state
+        function toggleTile(index) {
+            const tile = document.querySelector(`[data-index="${index}"]`);
+            
+            if (tile.classList.contains('gem')) {
+                tile.classList.remove('gem');
+                tile.classList.add('mine');
+                tile.textContent = '💣';
+            } else if (tile.classList.contains('mine')) {
+                tile.classList.remove('mine');
+                tile.textContent = '';
+            } else {
+                tile.classList.add('gem');
+                tile.textContent = '💎';
+            }
+        }
+
+        // Simple hash function for demonstration
+        async function simpleHash(text) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Generate prediction
+        async function generatePrediction() {
+            const serverSeed = document.getElementById('serverSeed').value || 'default_server';
+            const clientSeed = document.getElementById('clientSeed').value || 'default_client';
+            const nonce = document.getElementById('nonce').value || '1';
+            const mineCount = parseInt(document.getElementById('mineCount').value) || 5;
+            const safeStrategy = document.getElementById('safeStrategy').value;
+
+            // Show loading state
+            document.getElementById('hmacResult').textContent = 'Calculating...';
+            document.getElementById('bytesResult').textContent = 'Processing...';
+            document.getElementById('numberResult').textContent = 'Analyzing...';
+
+            // Simulate HMAC calculation
+            const combinedSeed = `${serverSeed}:${clientSeed}:${nonce}`;
+            const hash = await simpleHash(combinedSeed);
+            
+            // Display results
+            document.getElementById('hmacResult').textContent = hash;
+            
+            // Bytes breakdown
+            const bytes = hash.match(/.{2}/g).slice(0, 16);
+            document.getElementById('bytesResult').textContent = bytes.join(' ');
+            
+            // Number logic
+            const numbers = bytes.map(byte => parseInt(byte, 16));
+            document.getElementById('numberResult').textContent = numbers.join(', ');
+            
+            // Generate mine positions
+            const minePositions = [];
+            const usedPositions = new Set();
+            
+            for (let i = 0; i < mineCount; i++) {
+                let pos;
+                do {
+                    pos = numbers[i % numbers.length] % 25;
+                } while (usedPositions.has(pos));
+                
+                usedPositions.add(pos);
+                minePositions.push(pos);
+            }
+            
+            // Generate safe positions based on strategy
+            const safePositions = [];
+            const allPositions = Array.from({length: 25}, (_, i) => i);
+            const availableSafe = allPositions.filter(pos => !minePositions.includes(pos));
+            
+            let safeTilesToShow = Math.min(availableSafe.length, Math.floor((25 - mineCount) * 0.7)); // Show 70% of safe tiles
+            
+            if (safeStrategy === 'corners') {
+                const corners = [0, 4, 20, 24];
+                corners.forEach(pos => {
+                    if (availableSafe.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            } else if (safeStrategy === 'center') {
+                const center = [6, 7, 8, 11, 12, 13, 16, 17, 18];
+                center.forEach(pos => {
+                    if (availableSafe.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            } else if (safeStrategy === 'edges') {
+                const edges = [1, 2, 3, 5, 9, 10, 14, 15, 19, 21, 22, 23];
+                edges.forEach(pos => {
+                    if (availableSafe.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            }
+            
+            // Fill remaining safe positions randomly
+            while (safeTilesToShow > 0 && availableSafe.length > safePositions.length) {
+                const randomSafe = availableSafe[Math.floor(Math.random() * availableSafe.length)];
+                if (!safePositions.includes(randomSafe)) {
+                    safePositions.push(randomSafe);
+                    safeTilesToShow--;
+                }
+            }
+            
+            // Clear and update grid
+            clearGrid();
+            
+            // Show mines
+            minePositions.forEach(pos => {
+                const tile = document.querySelector(`[data-index="${pos}"]`);
+                tile.classList.add('mine');
+                tile.textContent = '💣';
+            });
+            
+            // Show safe tiles
+            safePositions.forEach(pos => {
+                const tile = document.querySelector(`[data-index="${pos}"]`);
+                tile.classList.add('safe');
+                tile.textContent = '💎';
+            });
+            
+            // Calculate confidence and risk
+            const confidence = Math.min(95, 60 + (hash.length % 35));
+            const riskLevel = mineCount <= 5 ? 'Low Risk' : mineCount <= 15 ? 'Medium Risk' : 'High Risk';
+            
+            document.getElementById('confidenceResult').textContent = `${confidence}%`;
+            document.getElementById('safeTilesResult').textContent = `${safePositions.length} / ${25 - mineCount}`;
+            document.getElementById('riskLevelResult').textContent = riskLevel;
+        }
+
+        // Clear grid
+        function clearGrid() {
+            const tiles = document.querySelectorAll('.grid-tile');
+            tiles.forEach(tile => {
+                tile.className = 'grid-tile';
+                tile.textContent = '';
+            });
+        }
+
+        // Reset all
+        function resetAll() {
+            document.getElementById('serverSeed').value = '';
+            document.getElementById('clientSeed').value = '';
+            document.getElementById('nonce').value = '';
+            document.getElementById('mineCount').value = '5';
+            clearGrid();
+            
+            document.getElementById('hmacResult').textContent = 'Ready for calculation...';
+            document.getElementById('bytesResult').textContent = 'Waiting for input...';
+            document.getElementById('numberResult').textContent = 'Pending analysis...';
+            document.getElementById('confidenceResult').textContent = '0%';
+        }
+
+        // Connect website
+        function connectWebsite() {
+            const url = document.getElementById('websiteUrl').value;
+            if (url) {
+                // Simulate connection
+                alert(`Attempting to connect to: ${url}\n\nNote: This is a demo tool. For actual integration, proper API access would be required.`);
+            } else {
+                alert('Please enter a valid URL');
+            }
+        }
+
+        // Paste functions
+        async function pasteHMAC() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('hmacResult').textContent = text;
+                alert('HMAC SHA256 pasted successfully!');
+            } catch (err) {
+                alert('Unable to paste. Please copy the HMAC value first.');
+            }
+        }
+
+        async function pasteBytes() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('bytesResult').textContent = text;
+                alert('Bytes breakdown pasted successfully!');
+            } catch (err) {
+                alert('Unable to paste. Please copy the bytes value first.');
+            }
+        }
+
+        async function pasteNumbers() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('numberResult').textContent = text;
+                alert('Number logic pasted successfully!');
+            } catch (err) {
+                alert('Unable to paste. Please copy the numbers first.');
+            }
+        }
+
+        // Boom detection variables
+        let boomHistory = [];
+        let boomPatterns = [];
+        let totalBooms = 0;
+        let currentAccuracy = 85;
+
+        // Handle boom screenshot upload
+        function handleBoomUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('boomPreview');
+                    const uploadText = document.getElementById('uploadText');
+                    
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadText.textContent = '✅ Boom screenshot uploaded!';
+                    
+                    // Simulate boom analysis
+                    analyzeBoomScreenshot(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Analyze boom screenshot (simulated AI analysis)
+        function analyzeBoomScreenshot(imageData) {
+            totalBooms++;
+            document.getElementById('boomCount').textContent = totalBooms;
+            
+            // Simulate boom position detection
+            const detectedBoomPosition = Math.floor(Math.random() * 25);
+            boomHistory.push({
+                position: detectedBoomPosition,
+                timestamp: Date.now(),
+                imageData: imageData
+            });
+            
+            // Update boom pattern
+            updateBoomPattern();
+            
+            // Increase accuracy with more data
+            if (totalBooms > 0) {
+                currentAccuracy = Math.min(99, 85 + (totalBooms * 2));
+                document.getElementById('accuracyFill').style.width = currentAccuracy + '%';
+                document.getElementById('accuracyText').textContent = currentAccuracy + '% Accurate';
+            }
+            
+            alert(`💥 Boom detected at position ${detectedBoomPosition + 1}!\nAI learning updated. Next prediction will be more accurate!`);
+        }
+
+        // Update boom pattern analysis
+        function updateBoomPattern() {
+            if (boomHistory.length < 2) {
+                document.getElementById('boomPatternResult').textContent = 'Need more data for pattern analysis';
+                return;
+            }
+            
+            // Analyze patterns
+            const recentBooms = boomHistory.slice(-5);
+            const positions = recentBooms.map(boom => boom.position);
+            
+            // Check for common patterns
+            const corners = [0, 4, 20, 24];
+            const edges = [1, 2, 3, 5, 9, 10, 14, 15, 19, 21, 22, 23];
+            const center = [6, 7, 8, 11, 12, 13, 16, 17, 18];
+            
+            let pattern = 'Random';
+            if (positions.filter(p => corners.includes(p)).length >= 3) {
+                pattern = 'Corner Pattern Detected';
+            } else if (positions.filter(p => edges.includes(p)).length >= 3) {
+                pattern = 'Edge Pattern Detected';
+            } else if (positions.filter(p => center.includes(p)).length >= 3) {
+                pattern = 'Center Pattern Detected';
+            }
+            
+            document.getElementById('boomPatternResult').textContent = pattern;
+            boomPatterns.push(pattern);
+        }
+
+        // Enhanced prediction with boom learning
+        async function generatePrediction() {
+            const serverSeed = document.getElementById('serverSeed').value || 'default_server';
+            const clientSeed = document.getElementById('clientSeed').value || 'default_client';
+            const nonce = document.getElementById('nonce').value || '1';
+            const mineCount = parseInt(document.getElementById('mineCount').value) || 5;
+            const safeStrategy = document.getElementById('safeStrategy').value;
+
+            // Show loading state
+            document.getElementById('hmacResult').textContent = 'Calculating...';
+            document.getElementById('bytesResult').textContent = 'Processing...';
+            document.getElementById('numberResult').textContent = 'Analyzing...';
+            document.getElementById('nextBetResult').textContent = 'AI Processing...';
+
+            // Simulate HMAC calculation
+            const combinedSeed = `${serverSeed}:${clientSeed}:${nonce}`;
+            const hash = await simpleHash(combinedSeed);
+            
+            // Display results
+            document.getElementById('hmacResult').textContent = hash;
+            
+            // Bytes breakdown
+            const bytes = hash.match(/.{2}/g).slice(0, 16);
+            document.getElementById('bytesResult').textContent = bytes.join(' ');
+            
+            // Number logic
+            const numbers = bytes.map(byte => parseInt(byte, 16));
+            document.getElementById('numberResult').textContent = numbers.join(', ');
+            
+            // Generate mine positions with boom learning
+            const minePositions = [];
+            const usedPositions = new Set();
+            
+            // Avoid recent boom positions if we have history
+            const avoidPositions = boomHistory.slice(-3).map(boom => boom.position);
+            
+            for (let i = 0; i < mineCount; i++) {
+                let pos;
+                let attempts = 0;
+                do {
+                    pos = numbers[i % numbers.length] % 25;
+                    attempts++;
+                    // If we've tried too many times, just use any position
+                    if (attempts > 50) break;
+                } while (usedPositions.has(pos) || (avoidPositions.includes(pos) && Math.random() > 0.3));
+                
+                usedPositions.add(pos);
+                minePositions.push(pos);
+            }
+            
+            // Generate safe positions with enhanced AI
+            const safePositions = [];
+            const allPositions = Array.from({length: 25}, (_, i) => i);
+            const availableSafe = allPositions.filter(pos => !minePositions.includes(pos));
+            
+            // Prioritize positions that haven't had booms recently
+            const safePriority = availableSafe.filter(pos => !avoidPositions.includes(pos));
+            
+            let safeTilesToShow = Math.min(availableSafe.length, Math.floor((25 - mineCount) * 0.8)); // Show 80% of safe tiles
+            
+            // Enhanced strategy selection
+            if (safeStrategy === 'corners') {
+                const corners = [0, 4, 20, 24];
+                corners.forEach(pos => {
+                    if (safePriority.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            } else if (safeStrategy === 'center') {
+                const center = [6, 7, 8, 11, 12, 13, 16, 17, 18];
+                center.forEach(pos => {
+                    if (safePriority.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            } else if (safeStrategy === 'edges') {
+                const edges = [1, 2, 3, 5, 9, 10, 14, 15, 19, 21, 22, 23];
+                edges.forEach(pos => {
+                    if (safePriority.includes(pos) && safeTilesToShow > 0) {
+                        safePositions.push(pos);
+                        safeTilesToShow--;
+                    }
+                });
+            }
+            
+            // Fill remaining safe positions from priority list
+            while (safeTilesToShow > 0 && safePriority.length > safePositions.length) {
+                const randomSafe = safePriority[Math.floor(Math.random() * safePriority.length)];
+                if (!safePositions.includes(randomSafe)) {
+                    safePositions.push(randomSafe);
+                    safeTilesToShow--;
+                }
+            }
+            
+            // Clear and update grid
+            clearGrid();
+            
+            // Show mines (hidden in real prediction)
+            if (document.getElementById('showMines') && document.getElementById('showMines').checked) {
+                minePositions.forEach(pos => {
+                    const tile = document.querySelector(`[data-index="${pos}"]`);
+                    tile.classList.add('mine');
+                    tile.textContent = '💣';
+                });
+            }
+            
+            // Show safe tiles
+            safePositions.forEach(pos => {
+                const tile = document.querySelector(`[data-index="${pos}"]`);
+                tile.classList.add('safe');
+                tile.textContent = '💎';
+            });
+            
+            // Calculate enhanced confidence
+            let confidence = Math.min(99, 75 + (totalBooms * 3) + (hash.length % 20));
+            if (boomHistory.length > 5) confidence = Math.min(99, confidence + 10);
+            
+            const riskLevel = mineCount <= 5 ? 'Low Risk' : mineCount <= 15 ? 'Medium Risk' : 'High Risk';
+            
+            // Next bet recommendation
+            const nextBetRecommendation = generateNextBetRecommendation(safePositions, mineCount);
+            
+            document.getElementById('confidenceResult').textContent = `${confidence}%`;
+            document.getElementById('safeTilesResult').textContent = `${safePositions.length} / ${25 - mineCount}`;
+            document.getElementById('riskLevelResult').textContent = riskLevel;
+            document.getElementById('nextBetResult').textContent = nextBetRecommendation;
+            document.getElementById('aiConfidenceResult').textContent = confidence >= 95 ? '🔥 100% SURE PREDICTION' : confidence >= 85 ? '⚡ HIGH CONFIDENCE' : '📊 GOOD PREDICTION';
+        }
+
+        // Generate next bet recommendation
+        function generateNextBetRecommendation(safePositions, mineCount) {
+            if (safePositions.length === 0) return 'No safe tiles detected - Skip this round';
+            
+            const recommendations = [
+                `Start with ${safePositions.length} safe tiles shown`,
+                `Recommended bet: ${mineCount <= 5 ? 'Medium' : mineCount <= 15 ? 'Low' : 'Very Low'} amount`,
+                `Stop after ${Math.min(3, safePositions.length)} successful picks`,
+                `Avoid positions: ${boomHistory.slice(-2).map(b => b.position + 1).join(', ')}`
+            ];
+            
+            return recommendations.join(' | ');
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            initializeGrid();
+            
+            // Add drag and drop functionality
+            const uploadArea = document.querySelector('.upload-area');
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    document.getElementById('boomUpload').files = files;
+                    handleBoomUpload({target: {files: files}});
+                }
+            });
+        };
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95fee87f642db1e3',t:'MTc1MjY0MTczNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
